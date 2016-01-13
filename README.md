@@ -46,7 +46,7 @@ angular.module("translations", []).config(["$translateProvider", function($trans
 
 ## API
 
-gulp-angular-translate([filename](https://github.com/RobbinHabermehl/gulp-angular-translate#filename---string-filenametemplatesjs), [options](https://github.com/RobbinHabermehl/gulp-angular-translate#options))
+gulp-angular-translate([filename](https://github.com/RobbinHabermehl/gulp-angular-translate#filename---string-filenametranslationssjs), [options](https://github.com/RobbinHabermehl/gulp-angular-translate#options))
 
 ---- 
 
@@ -89,6 +89,25 @@ en_US.json | en_US
 #### moduleSystem {string}
 
 > Wrap the translations in a module system. Currently supported systems: `RequireJS`, `Browserify`, `ES6` and `IIFE` (Immediately-Invoked Function Expression).
+
+
+#### translationsHeader {string} [translationsHeader=see below]
+
+> Override translations header.
+
+```js
+var TRANSLATIONS_HEADER = 'angular.module("<%= module %>"<%= standalone %>).config(["$translateProvider", function($translateProvider) {\n';
+```
+
+
+#### translationsFooter {string} [translationsFooter=see below]
+
+> Override translations footer.
+
+```js
+var TRANSLATIONS_FOOTER = '}]);\n';
+```
+
 
 ## License
 

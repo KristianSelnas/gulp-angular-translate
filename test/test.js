@@ -241,4 +241,32 @@ describe('gulp-angular-translate', function () {
     });
 
   });
+
+
+  describe('options.translationsHeader & options.translationsFooter', function () {
+
+    it('should override TRANSLATIONS_HEADER & TRANSLATIONS_FOOTER', function (cb) {
+      var stream = angularTranslate('translations.js', {
+        translationsHeader: 'var translations = (',
+        translationsFooter: ')'
+      });
+
+      stream.on('data', function (file) {
+        assert.equal(file.path, path.normalize(__dirname + '/translations.js'));
+        assert.equal(file.relative, 'translations.js');
+        assert.equal(file.contents.toString('utf8'), 'var translations = ($translateProvider.translations("en", {\"HEADLINE\":\"What an awesome module!\"});\n)');
+        cb();
+      });
+
+      stream.write(new gutil.File({
+        base: __dirname,
+        path: __dirname + '/locale-en.json',
+        contents: new Buffer('{"HEADLINE":"What an awesome module!"}')
+      }));
+
+      stream.end();
+    });
+
+  });
+
 });
